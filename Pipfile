@@ -9,6 +9,7 @@ verify_ssl = true
 flask = "*"
 joblib = "*"
 sklearn = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
