@@ -1,8 +1,10 @@
 from joblib import load
+import os
 
-with open(f'medical_appointment.joblib', 'rb') as f:
+print(os.getcwd())
+
+with open(os.getcwd() + '/medical_appointment.joblib', 'rb') as f:
     model = load(f)
-
 
 def predict(instance):
     prediction = model.predict(instance)
