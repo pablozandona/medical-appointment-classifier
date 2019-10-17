@@ -1,6 +1,6 @@
 from joblib import load
 
-with open(f'../medical_appointment.joblib', 'rb') as f:
+with open(f'medical_appointment.joblib', 'rb') as f:
     model = load(f)
 
 
