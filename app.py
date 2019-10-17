@@ -1,7 +1,9 @@
 from flask import Flask, request
 import model
+import CORS from flask-cors
 
 app = Flask(__name__)
+cors = CORS(app)
 
 instance = [
     # Sample data
@@ -15,7 +17,7 @@ instance = [
 def say_hello():
     return "Hello ML API :)"
 
-@app.route("/medical-appointment-ml/api/predict", methods=['POST'])
+@app.route("/predict", methods=['POST'])
 def predict():
     payload = request.json
     for item in payload:
