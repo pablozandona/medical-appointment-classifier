@@ -1,0 +1,13 @@
+[[source]]
+name = "medical-appointment-classifier"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+flask = "*"
+joblib = "*"
+
+[requires]
+python_version = "3.7"
