@@ -1,11 +1,7 @@
 from flask import Flask, request
-import joblib
+import model
 
 app = Flask(__name__)
-
-# Update model path
-with open(f'/home/salazar/Projects/medical-appointment-classifier/medical_appointment.joblib', 'rb') as f:
-    model = joblib.load(f)
 
 instance = [
     # Sample data
@@ -14,8 +10,8 @@ instance = [
     # [60, 1, 1, 1, 1, 1, 1, 5, 0],  => "No"
     # [50, 0, 0, 0, 0, 0, 1, 80, 0]  => "Yes"
 ]
-  
-@app.route('/greet')
+
+@app.route('/')
 def say_hello():
     return "Hello ML API :)"
 
@@ -25,10 +21,10 @@ def predict():
     for item in payload:
         values = [paciente[1] for paciente in item.items() if paciente[0] != 'nome_paciente']
         instance.insert(len(instance), values)
-    
+
     prediction = model.predict(instance)
     lista_pacientes = []
     for i, item in enumerate(payload):
-        lista_pacientes.insert(len(lista_pacientes), { item['nome_paciente']: prediction[i] })
+        lista_pacientes.insert(len(lista_pacientes), {item['nome_paciente']: prediction[i]})
 
-    return { 'predictions' : lista_pacientes }
+    return {'predictions': lista_pacientes}
