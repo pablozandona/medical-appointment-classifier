@@ -1,6 +1,6 @@
 from flask import Flask, request
+from flask_cors import CORS
 import model
-import CORS from flask-cors
 
 app = Flask(__name__)
 cors = CORS(app)
