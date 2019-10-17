@@ -1,0 +1,38 @@
+[
+  {
+      "nome_paciente": "João",
+      "idade": 5,
+      "auxilio_bolsa_familia": 0,
+      "hipertensao": 0,
+      "diabetes": 0,
+      "alcolismo": 0,
+      "deficienca": 0,
+      "sms_recebido": 0,
+      "dias_para_consulta": -1,
+      "genero_M": 1
+  },
+  {
+      "nome_paciente": "Maria",
+      "idade": 50,
+      "auxilio_bolsa_familia": 0,
+      "hipertensao": 0,
+      "diabetes": 0,
+      "alcolismo": 0,
+      "deficienca": 0,
+      "sms_recebido": 1,
+      "dias_para_consulta": 80,
+      "genero_M": 0
+  },
+  {
+      "nome_paciente": "Rosinha",
+      "idade": 23,
+      "auxilio_bolsa_familia": 0,
+      "hipertensao": 0,
+      "diabetes": 0,
+      "alcolismo": 0,
+      "deficienca": 0,
+      "sms_recebido": 0,
+      "dias_para_consulta": 2,
+      "genero_M": 0
+  }
+]
