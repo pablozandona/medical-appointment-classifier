@@ -1,8 +1,14 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_cors import CORS
 import model
+import utils
+import os
 
-app = Flask(__name__)
+static_file_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'www/dist')
+
+app = Flask(__name__,
+            static_folder='./www/dist',
+            template_folder='./www/dist')
 cors = CORS(app)
 
 instance = [
@@ -13,20 +19,42 @@ instance = [
     # [50, 0, 0, 0, 0, 0, 1, 80, 0]  => "Yes"
 ]
 
-@app.route('/')
-def say_hello():
-    return "Hello ML API :)"
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    print("Path: {}".format(path), static_file_dir)
+    return send_from_directory(static_file_dir, "index.html")
 
 @app.route("/predict", methods=['POST'])
 def predict():
     payload = request.json
+
+    print(payload)
+
+    if 'body' in payload:
+        payload = payload['body']
+
+    print(payload)
+
     for item in payload:
-        values = [paciente[1] for paciente in item.items() if paciente[0] != 'nome_paciente']
+
+        if not ('dias_para_consulta' in item):
+            item['dias_para_consulta'] = utils.get_day_distance(item['data_consulta'], item['data_agendamento'])
+
+        if not ('nome_paciente' in item):
+            item['nome_paciente'] = 'Dummy'
+
+        values = [item['idade'], item['auxilio_bolsa_familia'], item['hipertensao'],
+                  item['diabetes'], item['alcolismo'], item['deficienca'], item['sms_recebido'],
+                  item['dias_para_consulta'], item['genero']]
+        values = list(map(int, values))
+
         instance.insert(len(instance), values)
 
     prediction = model.predict(instance)
+
     lista_pacientes = []
     for i, item in enumerate(payload):
         lista_pacientes.insert(len(lista_pacientes), {item['nome_paciente']: prediction[i]})
 
-    return {'predictions': lista_pacientes}
+    return jsonify(lista_pacientes)
