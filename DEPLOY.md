@@ -20,7 +20,7 @@ git push heroku master
 
 ## Front-end
 
-###Dependências
+### Dependências
 - Vue.js:
 ```bash
 npm install -g @vue/cli
