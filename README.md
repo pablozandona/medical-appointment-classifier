@@ -58,3 +58,5 @@ O dataset consiste de aproximadamente 110.500 agendamentos de consulta médicas,
 
 **Classes (target variable)**
 - `No-show`: Paciente compareceu a consulta no dia agendado (1 ou 0)
+
+### [Deploy](https://github.com/pablozandona/medical-appointment-classifier/blob/master/DEPLOY.md)

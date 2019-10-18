@@ -120,12 +120,11 @@
                     <b-form-radio value="0">Não</b-form-radio>
                 </b-form-radio-group>
             </b-form-group>
-
-            <b-button type="submit" size="lg" variant="primary" class="m-2">Prever</b-button>
+            <b-button type="submit" size="lg" variant="primary" class="m-2">
+                Prever
+                 <b-spinner v-if="loading" type="grow"></b-spinner>
+            </b-button>
             <b-button type="reset" size="lg" variant="outline-danger" class="m-2">Limpar</b-button>
-            <b-alert variant="danger">
-                Dismissible Alert!
-            </b-alert>
         </b-form>
         <b-alert v-if="noShow === 'No'" show variant="danger" class="mt-5">
             Provável não comparecimento à consulta!
@@ -154,6 +153,7 @@
                     sms_recebido: '0',
                     diabetes: '0'
                 },
+                loading: false,
                 show: true,
                 showResult: false,
                 noShow: false,
@@ -162,6 +162,7 @@
         methods: {
             onSubmit(evt) {
                 evt.preventDefault();
+                this.loading = true;
                 axios.post(`https://medical-appointment-ml.herokuapp.com/predict`, {
                     body: [this.form]
                 })
@@ -169,8 +170,10 @@
                         if (r.data) {
                             this.noShow = r.data[0]['Dummy'];
                         }
+                        this.loading = false;
                     })
                     .catch(e => {
+                        this.loading = false;
                         this.errors.push(e)
                     })
             },
@@ -188,6 +191,7 @@
                     sms_recebido: '0',
                     diabetes: '0',
                 };
+                this.loading = false;
                 this.noShow = undefined;
                 this.show = false;
                 this.$nextTick(() => {
