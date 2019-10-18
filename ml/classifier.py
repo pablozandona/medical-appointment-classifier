@@ -1,4 +1,5 @@
 import joblib
+import os
 
 classifier = joblib.load('medical_appointment.joblib')
 

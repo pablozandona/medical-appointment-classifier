@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 import numpy as np
 
@@ -15,7 +17,7 @@ import joblib
 from sklearn import metrics
 import seaborn as sns
 
-dataset = pd.read_csv('data/medical_appointment.csv', delimiter=',')
+dataset = pd.read_csv(os.getcwd() + '/data/medical_appointment.csv', delimiter=',')
 
 # Remove os registros com idade inválida
 dataset = dataset[(dataset['Age'] >= 0) & (dataset['Age'] <= 95)]
@@ -110,4 +112,4 @@ sensibilidade = cm[1][1] / (cm[1][1] + cm[1][0])
 print('especificidade:', especificidade)
 print('sensibilidade: ', sensibilidade)
 
-joblib.dump(classifier_logit, 'medical_appointment.joblib')
+joblib.dump(classifier_logit, os.getcwd() + '/medical_appointment.joblib')

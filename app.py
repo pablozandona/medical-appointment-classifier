@@ -6,9 +6,7 @@ import os
 
 static_file_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'www/dist')
 
-app = Flask(__name__,
-            static_folder='./www/dist',
-            template_folder='./www/dist')
+app = Flask(__name__)
 cors = CORS(app)
 
 instance = [
@@ -19,11 +17,9 @@ instance = [
     # [50, 0, 0, 0, 0, 0, 1, 80, 0]  => "Yes"
 ]
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def catch_all(path):
-    print("Path: {}".format(path), static_file_dir)
-    return send_from_directory(static_file_dir, "index.html")
+@app.route('/')
+def root():
+    return "Hello ML API :)"
 
 @app.route("/predict", methods=['POST'])
 def predict():
