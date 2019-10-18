@@ -11,6 +11,7 @@ joblib = "*"
 sklearn = "*"
 gunicorn = "*"
 flask-cors = "*"
+python-dateutil = "*"
 
 [requires]
 python_version = "3.7"

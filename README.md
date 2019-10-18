@@ -1,6 +1,8 @@
 # Aprendizado Supervisionado
 ## Projeto: Previsão de comparecimento do paciente na consulta agendada
 
+### [DEMO](https://pablozandona.github.io/medical-appointment-classifier/)
+
 ### Instalação
 
 O projeto requer o **Python 3*** e as seguintes bibliotecas instaladas:
